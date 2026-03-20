@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:nonprofit_app/constants/app_constants.dart';
@@ -7,12 +6,18 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 class WidgetService {
   static Future<void> initialize() async {
-    if (Platform.isIOS) {
+    // home_widget only works on iOS and Android, skip on web/desktop.
+    if (kIsWeb) return;
+
+    final platform = defaultTargetPlatform;
+    if (platform == TargetPlatform.iOS) {
       await HomeWidget.setAppGroupId(AppConstants.widgetAppGroupId);
     }
 
-    // Use HomeWidget.renderFlutterWidget to render the QR code to an image
-    // and save it to shared storage for the native widget.
+    if (platform != TargetPlatform.iOS && platform != TargetPlatform.android) {
+      return;
+    }
+
     await HomeWidget.renderFlutterWidget(
       QrImageView(
         data: AppConstants.donationUrl,
