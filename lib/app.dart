@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nonprofit_app/constants/app_theme.dart';
-import 'package:nonprofit_app/screens/home_screen.dart';
+import 'package:nonprofit_app/screens/menu_screen.dart';
 
 class NonprofitApp extends StatelessWidget {
   const NonprofitApp({super.key});
@@ -10,7 +10,7 @@ class NonprofitApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hope Foundation',
       theme: AppTheme.theme,
-      home: const HomeScreen(),
+      home: const MenuScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
